@@ -5,11 +5,12 @@ var React = require('react');
 var ReactNative = require('react-native');
 
 var {
-    DeviceEventEmitter,
     LayoutAnimation,
     View,
     Platform
 } = ReactNative;
+
+var Keyboard = require('react-native/Libraries/Components/Keyboard/Keyboard');
 
 // From: https://medium.com/man-moon/writing-modern-react-native-ui-e317ff956f02
 const defaultAnimation = {
@@ -64,13 +65,13 @@ class KeyboardSpacer extends React.Component {
     componentDidMount() {
         if (Platform.OS == "android") {
             this._listeners = [
-                DeviceEventEmitter.addListener('keyboardDidShow', this.updateKeyboardSpace),
-                DeviceEventEmitter.addListener('keyboardDidHide', this.resetKeyboardSpace)
+                Keyboard.addListener('keyboardDidShow', this.updateKeyboardSpace),
+                Keyboard.addListener('keyboardDidHide', this.resetKeyboardSpace)
             ];
         } else {
             this._listeners = [
-                DeviceEventEmitter.addListener('keyboardWillShow', this.updateKeyboardSpace),
-                DeviceEventEmitter.addListener('keyboardWillHide', this.resetKeyboardSpace)
+                Keyboard.addListener('keyboardWillShow', this.updateKeyboardSpace),
+                Keyboard.addListener('keyboardWillHide', this.resetKeyboardSpace)
             ];
         }
     }
